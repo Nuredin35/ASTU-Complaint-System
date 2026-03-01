@@ -1,0 +1,508 @@
+/* ==========================================================================
+   ASTU Complaint System – Full UI/UX (Landing + All Dashboards)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --app-primary: #0d9488;
+  --app-primary-dark: #0f766e;
+  --app-primary-light: #14b8a6;
+  --app-primary-bg: rgba(13, 148, 136, 0.08);
+  --app-accent: #f59e0b;
+  --app-accent-bg: rgba(245, 158, 11, 0.1);
+  --app-bg: #f0fdfa;
+  --app-dash-bg: #f1f5f9;
+  --app-surface: #ffffff;
+  --app-border: rgba(15, 118, 110, 0.12);
+  --app-text: #0f172a;
+  --app-text-muted: #64748b;
+  --app-sidebar: #0f766e;
+  --app-sidebar-dark: #0d5c55;
+  --app-sidebar-border: rgba(255, 255, 255, 0.1);
+  --app-sidebar-text: rgba(255, 255, 255, 0.88);
+  --app-sidebar-hover: rgba(255, 255, 255, 0.12);
+  --app-active: rgba(255, 255, 255, 0.22);
+  --app-shadow-sm: 0 2px 8px rgba(15, 118, 110, 0.06);
+  --app-shadow: 0 8px 24px rgba(15, 118, 110, 0.08);
+  --app-shadow-lg: 0 16px 48px rgba(15, 118, 110, 0.1);
+  --app-radius: 16px;
+  --app-radius-lg: 20px;
+}
+
+* {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html, body { height: 100%; margin:0; padding:0; }
+
+body {
+  background: var(--app-bg);
+  color: var(--app-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* remove extra spacing above headers */
+header { margin: 0; padding: 0; }
+
+/* ensure containers don't add unwanted top padding */
+.container, .container-fluid { padding-top: 0; }
+
+/* ---------- Landing / Auth ---------- */
+.app-landing {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 40%, #99f6e4 100%);
+  background-attachment: fixed;
+}
+
+.app-hero {
+  padding: 2rem 0 3rem;
+}
+
+.app-hero .app-logo-wrap {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 1rem;
+  background: var(--app-surface);
+  border-radius: 24px;
+  box-shadow: var(--app-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid var(--app-border);
+}
+
+.app-hero .app-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.app-hero .app-title {
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--app-primary-dark);
+  letter-spacing: -0.02em;
+}
+
+.app-hero .app-subtitle { color: var(--app-primary); font-size: 0.95rem; font-weight: 500; }
+
+.app-section-label {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--app-primary);
+}
+
+.app-auth-link { color: var(--app-primary); font-weight: 600; text-decoration: none; }
+.app-auth-link:hover { color: var(--app-primary-dark); text-decoration: underline; }
+.app-brand-link { color: var(--app-primary-dark); font-weight: 800; text-decoration: none; }
+.app-brand-link:hover { color: var(--app-primary); }
+
+/* ---------- Dashboard layout ---------- */
+.app-dash-body {
+  background: var(--app-dash-bg);
+  min-height: 100vh;
+}
+
+.app-shell { min-height: 100vh; }
+
+.app-sidebar {
+  background: linear-gradient(180deg, var(--app-sidebar) 0%, var(--app-sidebar-dark) 100%);
+  color: #fff;
+  padding: 1.25rem 1rem;
+  border-right: 1px solid var(--app-sidebar-border);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure sidebar stays on top and links are always clickable */
+/* Keep sidebar visually above other content so links are clickable */
+.app-sidebar { position: relative; z-index: 9999; }
+
+@media (min-width: 992px) {
+  .app-sidebar {
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    width: 240px;
+    z-index: 100; /* keep sidebar below the topbar */
+  }
+  /* push main content right so sidebar doesn't cover it */
+  .app-shell main {
+    margin-left: 240px;
+  }
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--app-sidebar-border);
+  color: #fff;
+}
+
+.app-brand i { font-size: 1.35rem; opacity: 0.95; }
+
+/* Keep topbar visible above sidebar and content */
+.app-topbar { position: sticky; top: 0; z-index: 2000; }
+/* make inner flex container relative so absolute logout can align */
+.app-topbar > .d-flex { position: relative; }
+
+/* logout button placed at right corner */
+.app-topbar [data-action="logout"] {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* spacing between name text and logout when they are siblings */
+.app-topbar .d-flex .text-secondary { margin-right: 1rem; }
+.main { position: relative; z-index: 1; }
+
+/* when sidebar is shown, shift topbar to avoid being covered */
+@media (min-width: 992px) {
+  .app-topbar { 
+    width: calc(100% - 240px);
+    margin-left: 240px;
+  }
+}
+
+.app-nav { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.app-nav a {
+  color: var(--app-sidebar-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+/* Make it obvious links are interactive and ensure icon clicks bubble to the anchor */
+.app-nav a { cursor: pointer; position: relative; z-index: 10001; pointer-events: auto; }
+.app-nav a i { pointer-events: none; }
+
+/* In case any main content uses high z-index, ensure the main area sits below sidebar */
+.app-shell main { position: relative; z-index: 1; }
+
+.app-nav a:hover {
+  background: var(--app-sidebar-hover);
+  color: #fff;
+}
+
+.app-nav a[aria-current="page"] {
+  background: var(--app-active);
+  color: #fff;
+}
+
+.app-nav a.mt-2 { margin-top: 0.5rem !important; }
+
+.app-topbar {
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  box-shadow: var(--app-shadow-sm);
+  padding: 0.85rem 1.5rem;
+}
+
+.app-topbar .app-page-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--app-text);
+  margin: 0;
+}
+
+.app-content {
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .app-content { padding: 1.75rem 2rem; }
+}
+
+/* ---------- Stat cards (dashboard KPIs) ---------- */
+.app-stat-cards { display: grid; gap: 1rem; }
+
+@media (min-width: 768px) {
+  .app-stat-cards { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+}
+
+.app-stat-card {
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  padding: 1.25rem;
+  border: 1px solid var(--app-border);
+  box-shadow: var(--app-shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.app-stat-card:hover {
+  box-shadow: var(--app-shadow);
+  transform: translateY(-2px);
+}
+
+.app-stat-card__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--app-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.app-stat-card__value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--app-text);
+  line-height: 1.2;
+}
+
+.app-stat-card__meta {
+  font-size: 0.8rem;
+  color: var(--app-text-muted);
+  margin-top: 0.35rem;
+}
+
+.app-stat-card--primary .app-stat-card__value { color: var(--app-primary-dark); }
+.app-stat-card--success .app-stat-card__value { color: #059669; }
+.app-stat-card--warning .app-stat-card__value { color: #d97706; }
+.app-stat-card--danger .app-stat-card__value { color: #dc2626; }
+
+/* ---------- Cards ---------- */
+.app-card {
+  border: 0; /* remove outer border */
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-sm);
+  background: var(--app-surface);
+  /* border: 1px solid var(--app-border); */
+  overflow: hidden;
+}
+
+/* layout helpers: make content area scrollable when sidebar is tall */
+.app-shell { display: flex; flex-direction: row; }
+.app-shell main { flex: 1 1 auto; overflow-y: auto; }
+
+.app-card .card-body { padding: 1.5rem; }
+@media (min-width: 768px) { .app-card .card-body { padding: 1.75rem 2rem; } }
+
+.app-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--app-border);
+  background: rgba(15, 118, 110, 0.03);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.app-card-header__title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--app-text);
+  margin: 0;
+}
+
+.app-card-header__subtitle {
+  font-size: 0.85rem;
+  color: var(--app-text-muted);
+  margin-top: 0.15rem;
+}
+
+/* ---------- Tables ---------- */
+.app-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-table-wrap .table {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.app-table-wrap .table thead th {
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--app-text-muted);
+  background: rgba(15, 118, 110, 0.04);
+  border-bottom: 1px solid var(--app-border);
+  padding: 0.85rem 1rem;
+}
+
+.app-table-wrap .table tbody td {
+  padding: 0.9rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.app-table-wrap .table tbody tr:hover {
+  background: var(--app-primary-bg);
+}
+
+.app-table-wrap .table .fw-semibold { color: var(--app-primary-dark); }
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-primary-dark) 100%);
+  border: 0;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--app-primary-light) 0%, var(--app-primary) 100%);
+  border: 0;
+  filter: brightness(1.05);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--app-primary);
+  color: var(--app-primary);
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.btn-outline-primary:hover {
+  background: var(--app-primary-bg);
+  border-color: var(--app-primary);
+  color: var(--app-primary-dark);
+}
+
+.btn-outline-danger {
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-app-outline {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  color: var(--app-text);
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.875rem;
+  transition: all 0.18s ease;
+}
+
+.btn-app-outline:hover {
+  background: var(--app-primary-bg);
+  border-color: var(--app-primary);
+  color: var(--app-primary-dark);
+}
+
+/* ---------- Form controls ---------- */
+.form-control, .form-select {
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.95rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--app-primary);
+  box-shadow: 0 0 0 3px var(--app-primary-bg);
+}
+
+.form-label { font-weight: 600; color: var(--app-text); }
+
+/* ---------- Badges ---------- */
+.badge.rounded-pill { font-weight: 600; font-size: 0.75rem; padding: 0.35rem 0.65rem; }
+
+/* ---------- Role cards (landing) ---------- */
+.app-role-card {
+  display: block;
+  padding: 1.25rem 1rem;
+  border-radius: 16px;
+  border: 2px solid var(--app-border);
+  background: var(--app-surface);
+  color: var(--app-text);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.app-role-card:hover {
+  border-color: var(--app-primary);
+  background: var(--app-primary-bg);
+  color: var(--app-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--app-shadow-sm);
+}
+
+.app-role-card i {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--app-primary);
+}
+
+/* ---------- Chat ---------- */
+.chat-wrap {
+  height: 58vh;
+  min-height: 280px;
+  overflow: auto;
+  background: linear-gradient(180deg, rgba(15, 118, 110, 0.02) 0%, var(--app-surface) 100%);
+  border-radius: var(--app-radius);
+  border: 1px solid var(--app-border);
+  padding: 1rem;
+}
+
+.chat-msg {
+  max-width: 82%;
+  padding: 0.65rem 1rem;
+  border-radius: 14px;
+  font-size: 0.9rem;
+}
+
+.chat-msg.user {
+  margin-left: auto;
+  background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-primary-dark) 100%);
+  color: #fff;
+}
+
+.chat-msg.bot {
+  margin-right: auto;
+  background: var(--app-surface);
+  color: var(--app-text);
+  border: 1px solid var(--app-border);
+}
+
+/* ---------- List group (analytics) ---------- */
+.app-list-group .list-group-item {
+  border-color: var(--app-border);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+.app-list-group .list-group-item:first-child { border-radius: 0; }
+
+/* ---------- Filters row ---------- */
+.app-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.app-filters .form-control-sm,
+.app-filters .form-select-sm {
+  border-radius: 10px;
+  border: 1px solid var(--app-border);
+  max-width: 200px;
+}
